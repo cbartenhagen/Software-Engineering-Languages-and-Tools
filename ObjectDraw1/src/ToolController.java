@@ -15,7 +15,7 @@ import javax.swing.Icon;
  *
  * In summary, an AbstractAction is an object recognized by smart containers
  * such as JMenuBar's and JToolBar's.  These containers automatically register
- * the associate listners and extract any information necessary to properly
+ * the associate listeners and extract any information necessary to properly
  * display the object.
  *
  * For more information, consult the Java API for AbstractAction.
