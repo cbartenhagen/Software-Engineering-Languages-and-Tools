@@ -37,6 +37,7 @@ public class DrawingCanvas extends JComponent {
    * Creates a default DrawingCanvas with a white background
    */
   public DrawingCanvas() {
+	drawnList = new Vector<DrawnObject>();
 	drawnList.clear();
     setBackground( BACKGROUND );
     DCcontroller = createDrawingCanvasController();
@@ -163,6 +164,7 @@ public class DrawingCanvas extends JComponent {
   }
   
   public void addDrawnObject(DrawnObject obj){
-	 drawnList.add(obj);
+	  System.out.println("Drew " + obj.tool);
+	  drawnList.add(obj);
   }
 }// end public class DrawingCanvas extends JComponent

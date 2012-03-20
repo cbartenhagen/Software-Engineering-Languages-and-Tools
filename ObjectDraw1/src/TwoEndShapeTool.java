@@ -113,7 +113,7 @@ public class TwoEndShapeTool extends Tool {
                       currentMousePosition.x,
                       currentMousePosition.y);
     
-    // canvas.addDrawnObject(dobject);
+    canvas.addDrawnObject(dobject);
 
     /* Draw final"permanent" figure */
     shape.draw(iBGraphics,
