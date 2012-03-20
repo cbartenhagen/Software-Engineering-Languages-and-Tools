@@ -171,36 +171,17 @@ public class DrawingCanvas extends JComponent {
 	  System.out.println("Drew " + obj.creatorTool);
 	  drawnList.add(obj);
   }
-  
-  public void mousePressed(MouseEvent e){
-	  currentObject = null;
-	  lastMousePosition = e.getPoint();
-	  
-	  int locationX = e.getX();
-	  int locationY = e.getY();
-	  
-	  for(int i = drawnList.size() - 1; i >= 0; i--){
-		  int TLX = drawnList.elementAt(i).getTopLeftX();
-		  int TLY = drawnList.elementAt(i).getTopLeftY();
-		  int BRX = drawnList.elementAt(i).getBottomRightX();
-		  int BRY = drawnList.elementAt(i).getBottomRightY();
-		  
-		  if(TLX < locationX && BRX > locationX && TLY > locationY && BRY < locationY){
-			  currentObject = drawnList.elementAt(i);
-			  break;
-		  }
-	  }
+
+  public DrawnObject getCurrentObject() {
+	return currentObject;
+  }
+
+  public void setCurrentObject(DrawnObject currentObject) {
+	this.currentObject = currentObject;
+  }
+
+  public Vector<DrawnObject> getDrawnList() {
+	return drawnList;
   }
   
-  public void mouseDragged(MouseEvent e){
-	  int differenceX = e.getX()-lastMousePosition.x;
-	  int differenceY = e.getY()-lastMousePosition.y;
-	  
-	  if(currentObject != null){
-		  currentObject.setTopLeftX(currentObject.getTopLeftX() + differenceX);
-		  currentObject.setTopLeftY(currentObject.getTopLeftY() + differenceY);
-		  currentObject.setBottomRightX(currentObject.getBottomRightX() + differenceX);
-		  currentObject.setBottomRightY(currentObject.getBottomRightY() + differenceY);
-	  }
-  }
 }// end public class DrawingCanvas extends JComponent

@@ -114,6 +114,14 @@ public class ObjectDraw1 extends JApplet{
 	  protected ToolList createToolList() {
 	    ToolList actions = new ToolList();
 
+	    
+	    actions.add(
+	  	      new ToolController("Selection",
+	  	  	  getImageIcon("selection.jpg"),
+	  	  	  "selection tool",
+	  	  	  canvas,
+	  	  	  new SelectionTool(canvas, actions)));
+	    
 	    actions.add(
 	      new ToolController("Freehand",
 	  	                     getImageIcon("freehand.jpg"),
@@ -123,7 +131,7 @@ public class ObjectDraw1 extends JApplet{
 
 	    actions.add(
 	  		new ToolController("Line",
-	  		getImageIcon("selection.jpg"),
+	  		getImageIcon("line.jpg"),
 	  		"Line drawing tool",
 	  		canvas,
 	  		new TwoEndShapeTool(canvas, new LineShape())));

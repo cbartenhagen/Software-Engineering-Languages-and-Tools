@@ -56,4 +56,8 @@ public class ToolController extends AbstractAction {
   public void actionPerformed(ActionEvent e) {
     canvas.setcurrentTool(tool);
   }
+  
+  public Tool getTool() {
+	  return tool;
+  }
 }// end public class ToolController extends AbstractAction
