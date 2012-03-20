@@ -123,7 +123,7 @@ public class ObjectDraw1 extends JApplet{
 
 	    actions.add(
 	  		new ToolController("Line",
-	  		getImageIcon("line.jpg"),
+	  		getImageIcon("selection.jpg"),
 	  		"Line drawing tool",
 	  		canvas,
 	  		new TwoEndShapeTool(canvas, new LineShape())));
@@ -189,7 +189,7 @@ public class ObjectDraw1 extends JApplet{
 	  /* Main method  */
 	  public static void main(String[] args) {
 	    JFrame frame = new JFrame();
-	    frame.setTitle("MiniDraw Fourth Iteration");
+	    frame.setTitle("ObjectDraw First Iteration");
 	    frame.getContentPane().setLayout(new BorderLayout());
 	    frame.getContentPane().add(new ObjectDraw1(false),
 				      BorderLayout.CENTER);

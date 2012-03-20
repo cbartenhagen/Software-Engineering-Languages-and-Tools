@@ -2,7 +2,9 @@
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Point;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.util.Vector;
@@ -31,6 +33,9 @@ public class DrawingCanvas extends JComponent {
   protected Color penColor = Color.black;
   protected Tool currentTool;
   protected Vector<DrawnObject> drawnList;
+  protected DrawnObject currentObject;
+  Point lastMousePosition;
+  Point currentMousePosition;
 
   /****< Constructor >*********************************************************/
   /**
@@ -119,7 +124,6 @@ public class DrawingCanvas extends JComponent {
    * @param t new drawing tool
    */
   public void setcurrentTool(Tool t)  {
-	if( t != null )
       currentTool = t;
   }
 
@@ -164,7 +168,39 @@ public class DrawingCanvas extends JComponent {
   }
   
   public void addDrawnObject(DrawnObject obj){
-	  System.out.println("Drew " + obj.tool);
+	  System.out.println("Drew " + obj.creatorTool);
 	  drawnList.add(obj);
+  }
+  
+  public void mousePressed(MouseEvent e){
+	  currentObject = null;
+	  lastMousePosition = e.getPoint();
+	  
+	  int locationX = e.getX();
+	  int locationY = e.getY();
+	  
+	  for(int i = drawnList.size() - 1; i >= 0; i--){
+		  int TLX = drawnList.elementAt(i).getTopLeftX();
+		  int TLY = drawnList.elementAt(i).getTopLeftY();
+		  int BRX = drawnList.elementAt(i).getBottomRightX();
+		  int BRY = drawnList.elementAt(i).getBottomRightY();
+		  
+		  if(TLX < locationX && BRX > locationX && TLY > locationY && BRY < locationY){
+			  currentObject = drawnList.elementAt(i);
+			  break;
+		  }
+	  }
+  }
+  
+  public void mouseDragged(MouseEvent e){
+	  int differenceX = e.getX()-lastMousePosition.x;
+	  int differenceY = e.getY()-lastMousePosition.y;
+	  
+	  if(currentObject != null){
+		  currentObject.setTopLeftX(currentObject.getTopLeftX() + differenceX);
+		  currentObject.setTopLeftY(currentObject.getTopLeftY() + differenceY);
+		  currentObject.setBottomRightX(currentObject.getBottomRightX() + differenceX);
+		  currentObject.setBottomRightY(currentObject.getBottomRightY() + differenceY);
+	  }
   }
 }// end public class DrawingCanvas extends JComponent

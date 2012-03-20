@@ -47,6 +47,8 @@ public class DrawingCanvasController implements MouseListener,
     if(tool != null) {
       tool.mouseDragged(e);
     }
+    else
+    	canvas.mouseDragged(e);
   }
 
   /* (non-Javadoc)
@@ -57,6 +59,8 @@ public class DrawingCanvasController implements MouseListener,
     if(tool != null) {
       tool.mouseClicked(e);
     }
+    else
+      canvas.mousePressed(e);
   }
 
   /* (non-Javadoc)

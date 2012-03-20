@@ -111,7 +111,8 @@ public class TwoEndShapeTool extends Tool {
     DrawnObject dobject = new DrawnObject(startingMousePosition.x,
                       startingMousePosition.y,
                       currentMousePosition.x,
-                      currentMousePosition.y);
+                      currentMousePosition.y,
+                      getName());
     
     canvas.addDrawnObject(dobject);
 
