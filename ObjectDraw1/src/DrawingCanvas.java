@@ -5,6 +5,7 @@ import java.awt.Image;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.util.Vector;
 
 import javax.swing.JComponent;
 
@@ -29,12 +30,14 @@ public class DrawingCanvas extends JComponent {
   protected int canvasHeight;
   protected Color penColor = Color.black;
   protected Tool currentTool;
+  protected Vector<DrawnObject> drawnList;
 
   /****< Constructor >*********************************************************/
   /**
    * Creates a default DrawingCanvas with a white background
    */
   public DrawingCanvas() {
+	drawnList.clear();
     setBackground( BACKGROUND );
     DCcontroller = createDrawingCanvasController();
     addDrawingCanvasListener(DCcontroller);
@@ -79,6 +82,7 @@ public class DrawingCanvas extends JComponent {
    * Paints over the drawing canvas in the background color
    */
   public void clearCanvas() {
+	drawnList.clear();
 	imageBufferGraphics.setColor(BACKGROUND);
 	imageBufferGraphics.fillRect(0, 0, canvasWidth, canvasHeight);
 	imageBufferGraphics.setColor(penColor);
@@ -156,5 +160,9 @@ public class DrawingCanvas extends JComponent {
     repaint();
     canvasWidth = width;
     canvasHeight = height;
+  }
+  
+  public void addDrawnObject(DrawnObject obj){
+	 drawnList.add(obj);
   }
 }// end public class DrawingCanvas extends JComponent
