@@ -105,6 +105,15 @@ public class TwoEndShapeTool extends Tool {
     /* Return graphics context to normal drawing mode and color */
     iBGraphics.setPaintMode();
     iBGraphics.setColor(saveColor);
+    
+    /* Create the DrawnObject */
+    
+    DrawnObject dobject = new DrawnObject(startingMousePosition.x,
+                      startingMousePosition.y,
+                      currentMousePosition.x,
+                      currentMousePosition.y);
+    
+    // canvas.addDrawnObject(dobject);
 
     /* Draw final"permanent" figure */
     shape.draw(iBGraphics,
