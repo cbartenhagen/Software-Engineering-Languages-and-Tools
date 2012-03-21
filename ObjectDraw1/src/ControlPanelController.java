@@ -52,6 +52,10 @@ public class ControlPanelController	implements ActionListener, ItemListener {
   public void itemStateChanged(ItemEvent e)  {
     if (e.getStateChange() == ItemEvent.SELECTED) {
       canvas.setpenColor(itemToColor(e.getItem()));
+      if(canvas.getCurrentObject() != null){
+    	  canvas.getCurrentObject().setColor(canvas.getpenColor());
+    	  canvas.update();
+      }
     }
   }
 

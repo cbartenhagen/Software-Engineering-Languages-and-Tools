@@ -34,10 +34,37 @@ public class SelectionTool extends Tool {
 			  
 			  System.out.println(locationX + ", " + locationY + "..." + TLX + ", " + TLY + "..." + BRX + ", " + BRY);
 			  
-			  if(TLX < locationX && BRX > locationX && TLY < locationY && BRY > locationY){
-				  System.out.println("Did I Break?");
-				  canvas.setCurrentObject(canvas.getDrawnList().elementAt(i));
-				  break;
+			  if(TLX < BRX){
+				  if(TLY < BRY){
+					  if(TLX < locationX && BRX > locationX && TLY < locationY && BRY > locationY){
+						  System.out.println("Did I Break?");
+						  canvas.setCurrentObject(canvas.getDrawnList().elementAt(i));
+						  break;
+					  }
+				  }
+				  else{
+					  if(TLX < locationX && BRX > locationX && TLY >= locationY && BRY <= locationY){
+						  System.out.println("Did I Break?");
+						  canvas.setCurrentObject(canvas.getDrawnList().elementAt(i));
+						  break;
+					  }
+				  }
+			  }
+			  else if(TLX >= BRX){
+				  if(TLY < BRY){
+					  if(TLX > locationX && BRX < locationX && TLY < locationY && BRY > locationY){
+						  System.out.println("Did I Break?");
+						  canvas.setCurrentObject(canvas.getDrawnList().elementAt(i));
+						  break;
+					  }
+				  }
+				  else{
+					  if(TLX > locationX && BRX < locationX && TLY >= locationY && BRY <= locationY){
+						  System.out.println("Did I Break?");
+						  canvas.setCurrentObject(canvas.getDrawnList().elementAt(i));
+						  break;
+					  }
+				  }
 			  }
 		  }
 	  }

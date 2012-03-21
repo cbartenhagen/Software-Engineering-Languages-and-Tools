@@ -54,6 +54,7 @@ public class ToolController extends AbstractAction {
    * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
    */
   public void actionPerformed(ActionEvent e) {
+	canvas.setCurrentObject(null);
     canvas.setcurrentTool(tool);
   }
   
