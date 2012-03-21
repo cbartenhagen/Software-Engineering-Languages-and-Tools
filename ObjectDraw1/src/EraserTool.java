@@ -41,10 +41,44 @@ public class EraserTool extends Tool {
    * @see tools.Tool#mousePressed(java.awt.event.MouseEvent)
    */
   public void mousePressed(MouseEvent e)  {
-    if(canvas.getCurrentObject() != null){
-    	canvas.getDrawnList().remove(canvas.getCurrentObject());
-    }
-    canvas.setCurrentObject(null);
+	  int locationX = e.getX();
+	  int locationY = e.getY();
+	  
+	  for(int i = canvas.getDrawnList().size() - 1; i >= 0; i--){
+		  int TLX = canvas.getDrawnList().elementAt(i).getTopLeftX();
+		  int TLY = canvas.getDrawnList().elementAt(i).getTopLeftY();
+		  int BRX = canvas.getDrawnList().elementAt(i).getBottomRightX();
+		  int BRY = canvas.getDrawnList().elementAt(i).getBottomRightY();
+		  
+		  if(TLX < BRX){
+			  if(TLY < BRY){
+				  if(TLX < locationX && BRX > locationX && TLY < locationY && BRY > locationY){
+					  canvas.getDrawnList().remove(i);
+					  break;
+				  }
+			  }
+			  else{
+				  if(TLX < locationX && BRX > locationX && TLY >= locationY && BRY <= locationY){
+					  canvas.getDrawnList().remove(i);
+					  break;
+				  }
+			  }
+		  }
+		  else if(TLX >= BRX){
+			  if(TLY < BRY){
+				  if(TLX > locationX && BRX < locationX && TLY < locationY && BRY > locationY){
+					  canvas.getDrawnList().remove(i);
+					  break;
+				  }
+			  }
+			  else{
+				  if(TLX > locationX && BRX < locationX && TLY >= locationY && BRY <= locationY){
+					  canvas.getDrawnList().remove(i);
+					  break;
+				  }
+			  }
+		  }
+	  }
     canvas.update();
   }
 
@@ -55,15 +89,6 @@ public class EraserTool extends Tool {
    * @see tools.Tool#mouseDragged(java.awt.event.MouseEvent)
    */
   public void mouseDragged(MouseEvent e)  {
-    /* erase  */
-    Point newMousePosition = e.getPoint();
-    int x0 = Math.min(startingMousePosition.x, newMousePosition.x)-2;
-    int y0= Math.min(startingMousePosition.y, newMousePosition.y)-2;
-    int dx = Math.abs(newMousePosition.x - startingMousePosition.x) + 5;
-    int dy = Math.abs(newMousePosition.y - startingMousePosition.y) + 5;
-    drawErasure(x0, y0, dx, dy);
-    /* update current mouse coordinates */
-    startingMousePosition = newMousePosition;
   }
 
   /* (non-Javadoc)
@@ -74,8 +99,5 @@ public class EraserTool extends Tool {
    * @see tools.Tool#mouseReleased(java.awt.event.MouseEvent)
    */
   public void mouseReleased(MouseEvent e) {
-    Graphics iBGraphics = canvas.getimageBufferGraphics();
-    /* restore pen color  */
-    iBGraphics.setColor(saveColor);
   }
 }// end public class EraserTool extends Tool

@@ -112,7 +112,8 @@ public class TwoEndShapeTool extends Tool {
                       startingMousePosition.y,
                       currentMousePosition.x,
                       currentMousePosition.y,
-                      getName());
+                      getName(),
+                      saveColor);
     
     canvas.addDrawnObject(dobject);
 
@@ -130,7 +131,7 @@ public class TwoEndShapeTool extends Tool {
 
 	    /* Return graphics context to normal drawing mode and color */
 	    iBGraphics.setPaintMode();
-	    iBGraphics.setColor(saveColor);
+	    iBGraphics.setColor(drawing.getColor());
 	    
 	    /* Erase final temporary figure  */
 	    shape.draw(iBGraphics,

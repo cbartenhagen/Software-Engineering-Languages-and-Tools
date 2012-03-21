@@ -1,3 +1,5 @@
+import java.awt.Color;
+
 
 public class DrawnObject {
 	int topLeftX;
@@ -5,6 +7,7 @@ public class DrawnObject {
 	int bottomRightX;
 	int bottomRightY;
 	String creatorTool;
+	Color color;
 	
 	public int getTopLeftX() {
 		return topLeftX;
@@ -42,13 +45,22 @@ public class DrawnObject {
 		return creatorTool;
 	}
 	
+	public Color getColor() {
+		return color;
+	}
+
+	public void setColor(Color color) {
+		this.color = color;
+	}
+
 	//Constructor
-	public DrawnObject(int TLX, int TLY, int BRX, int BRY, String creatorTool){
+	public DrawnObject(int TLX, int TLY, int BRX, int BRY, String creatorTool, Color color){
 		topLeftX = TLX;
 		topLeftY = TLY;
 		bottomRightX = BRX;
 		bottomRightY = BRY;
 		this.creatorTool = creatorTool;
+		this.color = color;
 	}
 	
 	
