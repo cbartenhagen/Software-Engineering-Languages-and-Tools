@@ -4,7 +4,7 @@ public class DrawnObject {
 	int topLeftY;
 	int bottomRightX;
 	int bottomRightY;
-	String tool;
+	String creatorTool;
 	
 	public int getTopLeftX() {
 		return topLeftX;
@@ -38,12 +38,17 @@ public class DrawnObject {
 		this.bottomRightY = bottomRightY;
 	}
 
+	public String getCreatorTool() {
+		return creatorTool;
+	}
+	
 	//Constructor
-	public DrawnObject(int TLX, int TLY, int BRX, int BRY){
+	public DrawnObject(int TLX, int TLY, int BRX, int BRY, String creatorTool){
 		topLeftX = TLX;
 		topLeftY = TLY;
 		bottomRightX = BRX;
 		bottomRightY = BRY;
+		this.creatorTool = creatorTool;
 	}
 	
 	

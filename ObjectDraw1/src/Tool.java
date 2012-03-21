@@ -18,7 +18,8 @@ public abstract class Tool implements MouseListener,
                                       MouseMotionListener,
                                       KeyListener
 {
-
+  private String name;
+  
   @Override
   public void mouseClicked(MouseEvent e) { }
 
@@ -48,4 +49,16 @@ public abstract class Tool implements MouseListener,
 
   @Override
   public void mouseMoved(MouseEvent e) { }
+  
+  public void drawThis(DrawnObject figure) { }
+  
+  public void clearThis(DrawnObject figure) { }
+
+public String getName() {
+	return name;
+}
+
+public void setName(String name) {
+	this.name = name;
+}
 }// end public abstract class Tool implements MouseMotionListener, ...

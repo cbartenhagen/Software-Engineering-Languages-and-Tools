@@ -46,6 +46,7 @@ public class ObjectDraw1 extends JApplet{
 	    controlPanel = createControlPanelView();
 	    getContentPane().add(controlPanel, BorderLayout.SOUTH);
 	    toolList = createToolList();
+	    canvas.setToolList(toolList);
 	    toolBar = createToolBarView(toolList);
 	    getContentPane().add(toolBar, BorderLayout.WEST);
 	    menuBar = createMenuBarView(toolList);
@@ -114,6 +115,14 @@ public class ObjectDraw1 extends JApplet{
 	  protected ToolList createToolList() {
 	    ToolList actions = new ToolList();
 
+	    
+	    actions.add(
+	  	      new ToolController("Selection",
+	  	  	  getImageIcon("selection.jpg"),
+	  	  	  "selection tool",
+	  	  	  canvas,
+	  	  	  new SelectionTool(canvas, actions)));
+	    
 	    actions.add(
 	      new ToolController("Freehand",
 	  	                     getImageIcon("freehand.jpg"),
@@ -189,7 +198,7 @@ public class ObjectDraw1 extends JApplet{
 	  /* Main method  */
 	  public static void main(String[] args) {
 	    JFrame frame = new JFrame();
-	    frame.setTitle("MiniDraw Fourth Iteration");
+	    frame.setTitle("ObjectDraw First Iteration");
 	    frame.getContentPane().setLayout(new BorderLayout());
 	    frame.getContentPane().add(new ObjectDraw1(false),
 				      BorderLayout.CENTER);

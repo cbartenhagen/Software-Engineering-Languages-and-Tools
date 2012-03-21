@@ -2,7 +2,9 @@
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Point;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.util.Vector;
@@ -31,6 +33,10 @@ public class DrawingCanvas extends JComponent {
   protected Color penColor = Color.black;
   protected Tool currentTool;
   protected Vector<DrawnObject> drawnList;
+  protected DrawnObject currentObject;
+  protected ToolList toolList;
+  Point lastMousePosition;
+  Point currentMousePosition;
 
   /****< Constructor >*********************************************************/
   /**
@@ -63,8 +69,19 @@ public class DrawingCanvas extends JComponent {
   /* (non-Javadoc)
    * @see javax.swing.JComponent#update(java.awt.Graphics)
    */
-  public void update(Graphics g){
-     paint(g);
+  public void update(){
+	  clearCanvas();
+ 	 ToolListIterator iter;
+	  
+     for(int i = 0; i < drawnList.size(); i++){
+    	 iter = toolList.iterator();
+    	 while(iter.hasNext()){
+    		 Tool tool = ((ToolController) iter.next()).getTool();
+        	 if(drawnList.elementAt(i).getCreatorTool().equals(tool.getName())){
+        		 tool.drawThis(drawnList.elementAt(i));
+        	 }
+    	 }
+     }
   }
 
   /* (non-Javadoc)
@@ -82,8 +99,12 @@ public class DrawingCanvas extends JComponent {
   /**
    * Paints over the drawing canvas in the background color
    */
+  public void clearDrawnList() { 
+		drawnList.clear();
+	  
+  }
+  
   public void clearCanvas() {
-	drawnList.clear();
 	imageBufferGraphics.setColor(BACKGROUND);
 	imageBufferGraphics.fillRect(0, 0, canvasWidth, canvasHeight);
 	imageBufferGraphics.setColor(penColor);
@@ -119,7 +140,6 @@ public class DrawingCanvas extends JComponent {
    * @param t new drawing tool
    */
   public void setcurrentTool(Tool t)  {
-	if( t != null )
       currentTool = t;
   }
 
@@ -164,7 +184,24 @@ public class DrawingCanvas extends JComponent {
   }
   
   public void addDrawnObject(DrawnObject obj){
-	  System.out.println("Drew " + obj.tool);
+	  System.out.println("Drew " + obj.creatorTool);
 	  drawnList.add(obj);
   }
+
+  public DrawnObject getCurrentObject() {
+	return currentObject;
+  }
+
+  public void setCurrentObject(DrawnObject currentObject) {
+	this.currentObject = currentObject;
+  }
+
+  public Vector<DrawnObject> getDrawnList() {
+	return drawnList;
+  }
+  
+  public void setToolList(ToolList toolList) {
+	  this.toolList = toolList;
+  }
+  
 }// end public class DrawingCanvas extends JComponent

@@ -40,6 +40,7 @@ public class ToolController extends AbstractAction {
 		        DrawingCanvas c, Tool t) {
     super(name, icon);
     tool = t;
+    tool.setName(name);
     putValue(Action.DEFAULT, icon);
     putValue(Action.SHORT_DESCRIPTION, tip);
     setEnabled(tool != null);
@@ -54,5 +55,9 @@ public class ToolController extends AbstractAction {
    */
   public void actionPerformed(ActionEvent e) {
     canvas.setcurrentTool(tool);
+  }
+  
+  public Tool getTool() {
+	  return tool;
   }
 }// end public class ToolController extends AbstractAction
