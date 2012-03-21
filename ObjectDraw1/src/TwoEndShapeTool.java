@@ -124,4 +124,38 @@ public class TwoEndShapeTool extends Tool {
                e.getPoint().y);
     canvas.repaint();
   }
+  
+  public void drawThis(DrawnObject drawing) {
+	    Graphics iBGraphics = canvas.getimageBufferGraphics();
+
+	    /* Return graphics context to normal drawing mode and color */
+	    iBGraphics.setPaintMode();
+	    iBGraphics.setColor(saveColor);
+	    
+	    /* Erase final temporary figure  */
+	    shape.draw(iBGraphics,
+	                      drawing.getTopLeftX(),
+	                      drawing.getTopLeftY(),
+	                      drawing.getBottomRightX(),
+	                      drawing.getBottomRightY());
+	    
+	    canvas.repaint();
+	  }
+  
+  public void clearThis(DrawnObject drawing) {
+	    Graphics iBGraphics = canvas.getimageBufferGraphics();
+
+	    /* Return graphics context to normal drawing mode and color */
+	    iBGraphics.setXORMode(Color.black);
+	    iBGraphics.setColor(Color.white);
+	    
+	    /* Erase final temporary figure  */
+	    shape.draw(iBGraphics,
+	                      drawing.getTopLeftX(),
+	                      drawing.getTopLeftY(),
+	                      drawing.getBottomRightX(),
+	                      drawing.getBottomRightY());
+	    
+	    canvas.repaint();
+	  }
 }// end public class TwoEndShapeTool extends Tool

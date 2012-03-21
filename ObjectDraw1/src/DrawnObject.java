@@ -38,6 +38,10 @@ public class DrawnObject {
 		this.bottomRightY = bottomRightY;
 	}
 
+	public String getCreatorTool() {
+		return creatorTool;
+	}
+	
 	//Constructor
 	public DrawnObject(int TLX, int TLY, int BRX, int BRY, String creatorTool){
 		topLeftX = TLX;

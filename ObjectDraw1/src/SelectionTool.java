@@ -32,7 +32,10 @@ public class SelectionTool extends Tool {
 			  int BRX = canvas.getDrawnList().elementAt(i).getBottomRightX();
 			  int BRY = canvas.getDrawnList().elementAt(i).getBottomRightY();
 			  
-			  if(TLX < locationX && BRX > locationX && TLY > locationY && BRY < locationY){
+			  System.out.println(locationX + ", " + locationY + "..." + TLX + ", " + TLY + "..." + BRX + ", " + BRY);
+			  
+			  if(TLX < locationX && BRX > locationX && TLY < locationY && BRY > locationY){
+				  System.out.println("Did I Break?");
 				  canvas.setCurrentObject(canvas.getDrawnList().elementAt(i));
 				  break;
 			  }
@@ -44,10 +47,30 @@ public class SelectionTool extends Tool {
 		  int differenceY = e.getY()-startingMousePosition.y;
 		  
 		  if(canvas.getCurrentObject() != null){
-			  canvas.getCurrentObject().setTopLeftX(canvas.getCurrentObject().getTopLeftX() + differenceX);
-			  canvas.getCurrentObject().setTopLeftY(canvas.getCurrentObject().getTopLeftY() + differenceY);
-			  canvas.getCurrentObject().setBottomRightX(canvas.getCurrentObject().getBottomRightX() + differenceX);
-			  canvas.getCurrentObject().setBottomRightY(canvas.getCurrentObject().getBottomRightY() + differenceY);
+			  ToolListIterator iter = toolList.iterator();
+			  
+			  Tool thisTool = null;
+			  
+			  while(iter.hasNext()){
+				  thisTool = ((ToolController) iter.next()).getTool();
+				  if(canvas.getCurrentObject().getCreatorTool().equals(thisTool.getName())){
+					  thisTool.clearThis(canvas.getCurrentObject());
+				  }
+			  }
+			  
+			  if(canvas.getCurrentObject() != null){
+				  canvas.getCurrentObject().setTopLeftX(canvas.getCurrentObject().getTopLeftX() + differenceX);
+				  canvas.getCurrentObject().setTopLeftY(canvas.getCurrentObject().getTopLeftY() + differenceY);
+				  canvas.getCurrentObject().setBottomRightX(canvas.getCurrentObject().getBottomRightX() + differenceX);
+				  canvas.getCurrentObject().setBottomRightY(canvas.getCurrentObject().getBottomRightY() + differenceY);
+			  }
+			  
+			  if(thisTool != null){
+				  thisTool.drawThis(canvas.getCurrentObject());
+			  }
+			  
+			  startingMousePosition.x = e.getX();
+			  startingMousePosition.y = e.getY();
 		  }
 	  }
 	
