@@ -46,6 +46,7 @@ public class ObjectDraw1 extends JApplet{
 	    controlPanel = createControlPanelView();
 	    getContentPane().add(controlPanel, BorderLayout.SOUTH);
 	    toolList = createToolList();
+	    canvas.setToolList(toolList);
 	    toolBar = createToolBarView(toolList);
 	    getContentPane().add(toolBar, BorderLayout.WEST);
 	    menuBar = createMenuBarView(toolList);

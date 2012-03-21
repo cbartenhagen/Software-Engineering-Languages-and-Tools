@@ -47,16 +47,16 @@ public class SelectionTool extends Tool {
 		  int differenceY = e.getY()-startingMousePosition.y;
 		  
 		  if(canvas.getCurrentObject() != null){
-			  ToolListIterator iter = toolList.iterator();
+			  //ToolListIterator iter = toolList.iterator();
 			  
-			  Tool thisTool = null;
+			  //Tool thisTool = null;
 			  
-			  while(iter.hasNext()){
+			  /*while(iter.hasNext()){
 				  thisTool = ((ToolController) iter.next()).getTool();
 				  if(canvas.getCurrentObject().getCreatorTool().equals(thisTool.getName())){
 					  thisTool.clearThis(canvas.getCurrentObject());
 				  }
-			  }
+			  }*/
 			  
 			  if(canvas.getCurrentObject() != null){
 				  canvas.getCurrentObject().setTopLeftX(canvas.getCurrentObject().getTopLeftX() + differenceX);
@@ -65,12 +65,13 @@ public class SelectionTool extends Tool {
 				  canvas.getCurrentObject().setBottomRightY(canvas.getCurrentObject().getBottomRightY() + differenceY);
 			  }
 			  
-			  if(thisTool != null){
+			  /*if(thisTool != null){
 				  thisTool.drawThis(canvas.getCurrentObject());
-			  }
+			  }*/
 			  
 			  startingMousePosition.x = e.getX();
 			  startingMousePosition.y = e.getY();
+			  canvas.update();
 		  }
 	  }
 	

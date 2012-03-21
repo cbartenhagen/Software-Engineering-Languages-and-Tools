@@ -41,10 +41,11 @@ public class EraserTool extends Tool {
    * @see tools.Tool#mousePressed(java.awt.event.MouseEvent)
    */
   public void mousePressed(MouseEvent e)  {
-    startingMousePosition = e.getPoint();
-    Graphics iBGraphics = canvas.getimageBufferGraphics();
-    saveColor = iBGraphics.getColor( );
-    iBGraphics.setColor( canvas.BACKGROUND );
+    if(canvas.getCurrentObject() != null){
+    	canvas.getDrawnList().remove(canvas.getCurrentObject());
+    }
+    canvas.setCurrentObject(null);
+    canvas.update();
   }
 
   /* (non-Javadoc)

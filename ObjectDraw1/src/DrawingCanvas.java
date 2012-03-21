@@ -34,6 +34,7 @@ public class DrawingCanvas extends JComponent {
   protected Tool currentTool;
   protected Vector<DrawnObject> drawnList;
   protected DrawnObject currentObject;
+  protected ToolList toolList;
   Point lastMousePosition;
   Point currentMousePosition;
 
@@ -68,8 +69,19 @@ public class DrawingCanvas extends JComponent {
   /* (non-Javadoc)
    * @see javax.swing.JComponent#update(java.awt.Graphics)
    */
-  public void update(Graphics g){
-     paint(g);
+  public void update(){
+	  clearCanvas();
+ 	 ToolListIterator iter;
+	  
+     for(int i = 0; i < drawnList.size(); i++){
+    	 iter = toolList.iterator();
+    	 while(iter.hasNext()){
+    		 Tool tool = ((ToolController) iter.next()).getTool();
+        	 if(drawnList.elementAt(i).getCreatorTool().equals(tool.getName())){
+        		 tool.drawThis(drawnList.elementAt(i));
+        	 }
+    	 }
+     }
   }
 
   /* (non-Javadoc)
@@ -87,8 +99,12 @@ public class DrawingCanvas extends JComponent {
   /**
    * Paints over the drawing canvas in the background color
    */
+  public void clearDrawnList() { 
+		drawnList.clear();
+	  
+  }
+  
   public void clearCanvas() {
-	drawnList.clear();
 	imageBufferGraphics.setColor(BACKGROUND);
 	imageBufferGraphics.fillRect(0, 0, canvasWidth, canvasHeight);
 	imageBufferGraphics.setColor(penColor);
@@ -182,6 +198,10 @@ public class DrawingCanvas extends JComponent {
 
   public Vector<DrawnObject> getDrawnList() {
 	return drawnList;
+  }
+  
+  public void setToolList(ToolList toolList) {
+	  this.toolList = toolList;
   }
   
 }// end public class DrawingCanvas extends JComponent
