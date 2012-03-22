@@ -8,6 +8,7 @@ public class DrawnObject {
 	int bottomRightY;
 	String creatorTool;
 	Color color;
+	boolean filled;
 	
 	public int getTopLeftX() {
 		return topLeftX;
@@ -53,14 +54,23 @@ public class DrawnObject {
 		this.color = color;
 	}
 
+	public boolean isFilled() {
+		return filled;
+	}
+
+	public void setFilled(boolean filled) {
+		this.filled = filled;
+	}
+
 	//Constructor
-	public DrawnObject(int TLX, int TLY, int BRX, int BRY, String creatorTool, Color color){
+	public DrawnObject(int TLX, int TLY, int BRX, int BRY, String creatorTool, Color color, boolean filled){
 		topLeftX = TLX;
 		topLeftY = TLY;
 		bottomRightX = BRX;
 		bottomRightY = BRY;
 		this.creatorTool = creatorTool;
 		this.color = color;
+		this.filled = filled;
 	}
 	
 	

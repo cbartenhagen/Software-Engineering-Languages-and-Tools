@@ -20,6 +20,7 @@ public class ControlPanelView extends JPanel {
   protected ControlPanelController CPcontroller;
   protected JButton clearButton;
   protected JComboBox comboBox;
+  protected JComboBox filledBox;
 
   /****< Constructors >********************************************************/
 
@@ -43,6 +44,11 @@ public class ControlPanelView extends JPanel {
     comboBox.addItem("green");
     comboBox.addItem("red");
     add(comboBox);
+    add(new JLabel("Filled shapes"));
+    filledBox = new JComboBox();
+    filledBox.addItem("outline");
+    filledBox.addItem("filled");
+    add(filledBox);
     ControlPanelController CPcontroller = createControlPanelController();
     addControlPanelListener(CPcontroller);
   }
@@ -75,6 +81,7 @@ public class ControlPanelView extends JPanel {
 	  if( listener != null ) {
       clearButton.addActionListener((ActionListener)listener);
       comboBox.addItemListener((ItemListener)listener);
+      filledBox.addItemListener((ItemListener)listener);
 	  } else {
 	    throw new IllegalArgumentException();
     }// end argument check

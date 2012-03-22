@@ -113,16 +113,26 @@ public class TwoEndShapeTool extends Tool {
                       currentMousePosition.x,
                       currentMousePosition.y,
                       getName(),
-                      saveColor);
+                      saveColor,
+                      canvas.isFilled());
     
     canvas.addDrawnObject(dobject);
 
     /* Draw final"permanent" figure */
-    shape.draw(iBGraphics,
+    if(canvas.isFilled()){
+    	shape.draw(iBGraphics,
                startingMousePosition.x,
                startingMousePosition.y,
                e.getPoint().x,
                e.getPoint().y);
+    }
+    else{
+    	shape.drawOutline(iBGraphics,
+                startingMousePosition.x,
+                startingMousePosition.y,
+                e.getPoint().x,
+                e.getPoint().y);
+    }
     canvas.repaint();
   }
   
@@ -134,11 +144,20 @@ public class TwoEndShapeTool extends Tool {
 	    iBGraphics.setColor(drawing.getColor());
 	    
 	    /* Erase final temporary figure  */
-	    shape.draw(iBGraphics,
+	    if(drawing.isFilled()){
+	    	shape.draw(iBGraphics,
 	                      drawing.getTopLeftX(),
 	                      drawing.getTopLeftY(),
 	                      drawing.getBottomRightX(),
 	                      drawing.getBottomRightY());
+	    }
+	    else{
+	    	shape.drawOutline(iBGraphics,
+                    drawing.getTopLeftX(),
+                    drawing.getTopLeftY(),
+                    drawing.getBottomRightX(),
+                    drawing.getBottomRightY());
+	    }
 	    
 	    canvas.repaint();
 	  }

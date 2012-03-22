@@ -41,7 +41,7 @@ public class OvalShape extends TwoEndShape {
       shapeY = y1;
       shapeHeight = (y0-y1)+1;
     }
-    g.drawOval(shapeX, shapeY, shapeWidth, shapeHeight);
+    g.fillOval(shapeX, shapeY, shapeWidth, shapeHeight);
   }
 
   /* (non-Javadoc)

@@ -41,7 +41,7 @@ public class RectangleShape extends TwoEndShape {
       shapeY = y1;
       shapeHeight = (y0-y1)+1;
     }
-    g.drawRect(shapeX, shapeY, shapeWidth, shapeHeight);
+    g.fillRect(shapeX, shapeY, shapeWidth, shapeHeight);
   }
 
   /* (non-Javadoc)
