@@ -40,7 +40,7 @@ public class ControlPanelController	implements ActionListener, ItemListener {
    * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
    */
   public void actionPerformed(ActionEvent e) {
-    canvas.clearCanvas();
+    canvas.clearDrawnList();
   }
 
   /* (non-Javadoc)

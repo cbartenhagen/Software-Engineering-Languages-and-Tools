@@ -11,7 +11,7 @@ import java.net.*;
  * and any associations.
  */
 @SuppressWarnings("serial")
-public class ObjectDraw1 extends JApplet{
+public class ObjectDraw3 extends JApplet{
 
 	  /* Main Components */
 	  protected DrawingCanvas canvas;
@@ -22,14 +22,14 @@ public class ObjectDraw1 extends JApplet{
 	  protected boolean isApplet = false;
 
 	  /****< Constructors and Initializers >***************************************/
-	  public ObjectDraw1(boolean isApplet) {
+	  public ObjectDraw3(boolean isApplet) {
 	    this.isApplet = isApplet;
 	    if (!isApplet) {
 	      init();
 	    }
 	  }
 
-	  public ObjectDraw1() {
+	  public ObjectDraw3() {
 	    /* invoked as Applet */
 	    this(true);
 	  }
@@ -198,9 +198,9 @@ public class ObjectDraw1 extends JApplet{
 	  /* Main method  */
 	  public static void main(String[] args) {
 	    JFrame frame = new JFrame();
-	    frame.setTitle("ObjectDraw First Iteration");
+	    frame.setTitle("ObjectDraw Third Iteration");
 	    frame.getContentPane().setLayout(new BorderLayout());
-	    frame.getContentPane().add(new ObjectDraw1(false),
+	    frame.getContentPane().add(new ObjectDraw3(false),
 				      BorderLayout.CENTER);
 	    frame.addWindowListener(new AppCloser());
 	    frame.pack();
