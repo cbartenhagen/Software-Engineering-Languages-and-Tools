@@ -32,6 +32,35 @@ public class SelectionTool extends Tool {
 			  int BRX = canvas.getDrawnList().elementAt(i).getBottomRightX();
 			  int BRY = canvas.getDrawnList().elementAt(i).getBottomRightY();
 			  
+			  if(TLX < BRX){
+				  if(TLY < BRY){
+					  TLX -= 10;
+					  TLY -= 10;
+					  BRX += 10;
+					  BRY += 10;
+				  }
+				  else{
+					  TLX -= 10;
+					  TLY += 10;
+					  BRX += 10;
+					  BRY -= 10;
+				  }
+			  }
+			  else{
+				  if(TLY < BRY){
+					  TLX += 10;
+					  TLY -= 10;
+					  BRX -= 10;
+					  BRY += 10;
+				  }
+				  else{
+					  TLX += 10;
+					  TLY += 10;
+					  BRX -= 10;
+					  BRY -= 10;
+				  }
+			  }
+			  
 			  System.out.println(locationX + ", " + locationY + "..." + TLX + ", " + TLY + "..." + BRX + ", " + BRY);
 			  
 			  if(TLX < BRX){
@@ -74,32 +103,45 @@ public class SelectionTool extends Tool {
 		  int differenceY = e.getY()-startingMousePosition.y;
 		  
 		  if(canvas.getCurrentObject() != null){
-			  //ToolListIterator iter = toolList.iterator();
+			  int TLX = canvas.getCurrentObject().getTopLeftX();
+			  int TLY = canvas.getCurrentObject().getTopLeftY();
+			  int BRX = canvas.getCurrentObject().getBottomRightX();
+			  int BRY = canvas.getCurrentObject().getBottomRightY();
 			  
-			  //Tool thisTool = null;
 			  
-			  /*while(iter.hasNext()){
-				  thisTool = ((ToolController) iter.next()).getTool();
-				  if(canvas.getCurrentObject().getCreatorTool().equals(thisTool.getName())){
-					  thisTool.clearThis(canvas.getCurrentObject());
-				  }
-			  }*/
+			  if(Math.sqrt(Math.pow(startingMousePosition.x - BRX, 2) + Math.pow(startingMousePosition.y - BRY, 2)) <= 10){
+				  canvas.getCurrentObject().setBottomRightX(canvas.getCurrentObject().getBottomRightX() + differenceX);
+				  canvas.getCurrentObject().setBottomRightY(canvas.getCurrentObject().getBottomRightY() + differenceY);
+				  System.out.println("point1");
+			  }
+			  else if(Math.sqrt(Math.pow(startingMousePosition.x - TLX, 2) + Math.pow(startingMousePosition.y - TLY, 2)) <= 10){
+				  canvas.getCurrentObject().setTopLeftX(canvas.getCurrentObject().getTopLeftX() + differenceX);
+				  canvas.getCurrentObject().setTopLeftY(canvas.getCurrentObject().getTopLeftY() + differenceY);
+				  System.out.println("point2");
+			  }
+			  else if(Math.sqrt(Math.pow(startingMousePosition.x - BRX, 2) + Math.pow(startingMousePosition.y - TLY, 2)) <= 10){
+				  canvas.getCurrentObject().setBottomRightX(canvas.getCurrentObject().getBottomRightX() + differenceX);
+				  canvas.getCurrentObject().setTopLeftY(canvas.getCurrentObject().getTopLeftY() + differenceY);
+				  System.out.println("point3");
+			  }
+			  else if(Math.sqrt(Math.pow(startingMousePosition.x - TLX, 2) + Math.pow(startingMousePosition.y - BRY, 2)) <= 10){
+				  canvas.getCurrentObject().setTopLeftX(canvas.getCurrentObject().getTopLeftX() + differenceX);
+				  canvas.getCurrentObject().setBottomRightY(canvas.getCurrentObject().getBottomRightY() + differenceY);
+				  System.out.println("point4");
+			  }
 			  
-			  if(canvas.getCurrentObject() != null){
+			  else{
 				  canvas.getCurrentObject().setTopLeftX(canvas.getCurrentObject().getTopLeftX() + differenceX);
 				  canvas.getCurrentObject().setTopLeftY(canvas.getCurrentObject().getTopLeftY() + differenceY);
 				  canvas.getCurrentObject().setBottomRightX(canvas.getCurrentObject().getBottomRightX() + differenceX);
 				  canvas.getCurrentObject().setBottomRightY(canvas.getCurrentObject().getBottomRightY() + differenceY);
 			  }
 			  
-			  /*if(thisTool != null){
-				  thisTool.drawThis(canvas.getCurrentObject());
-			  }*/
-			  
-			  startingMousePosition.x = e.getX();
-			  startingMousePosition.y = e.getY();
 			  canvas.update();
 		  }
+		  
+		  startingMousePosition.x = e.getX();
+		  startingMousePosition.y = e.getY();
 	  }
 	
 }
