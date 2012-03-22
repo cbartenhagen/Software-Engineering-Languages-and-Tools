@@ -101,6 +101,7 @@ public class DrawingCanvas extends JComponent {
    */
   public void clearDrawnList() { 
 		drawnList.clear();
+		clearCanvas();
 	  
   }
   
