@@ -114,7 +114,8 @@ public class TwoEndShapeTool extends Tool {
                       currentMousePosition.y,
                       getName(),
                       saveColor,
-                      canvas.isFilled());
+                      canvas.isFilled(),
+                      null);
     
     canvas.addDrawnObject(dobject);
 

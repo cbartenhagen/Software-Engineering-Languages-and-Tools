@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.util.Vector;
 
 
 public class DrawnObject {
@@ -9,6 +10,7 @@ public class DrawnObject {
 	String creatorTool;
 	Color color;
 	boolean filled;
+	Vector<Object> otherThings;
 	
 	public int getTopLeftX() {
 		return topLeftX;
@@ -62,8 +64,16 @@ public class DrawnObject {
 		this.filled = filled;
 	}
 
+	public Vector<Object> getOtherThings() {
+		return otherThings;
+	}
+
+	public void setOtherThings(Vector<Object> otherThings) {
+		this.otherThings = otherThings;
+	}
+
 	//Constructor
-	public DrawnObject(int TLX, int TLY, int BRX, int BRY, String creatorTool, Color color, boolean filled){
+	public DrawnObject(int TLX, int TLY, int BRX, int BRY, String creatorTool, Color color, boolean filled, Vector<Object> otherThings){
 		topLeftX = TLX;
 		topLeftY = TLY;
 		bottomRightX = BRX;
@@ -71,6 +81,7 @@ public class DrawnObject {
 		this.creatorTool = creatorTool;
 		this.color = color;
 		this.filled = filled;
+		this.otherThings = otherThings;
 	}
 	
 	
