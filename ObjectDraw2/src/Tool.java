@@ -51,8 +51,6 @@ public abstract class Tool implements MouseListener,
   public void mouseMoved(MouseEvent e) { }
   
   public void drawThis(DrawnObject figure) { }
-  
-  public void clearThis(DrawnObject figure) { }
 
 public String getName() {
 	return name;
