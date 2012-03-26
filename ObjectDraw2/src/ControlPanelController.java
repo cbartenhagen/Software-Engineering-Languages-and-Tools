@@ -51,11 +51,21 @@ public class ControlPanelController	implements ActionListener, ItemListener {
    */
   public void itemStateChanged(ItemEvent e)  {
     if (e.getStateChange() == ItemEvent.SELECTED) {
-      canvas.setpenColor(itemToColor(e.getItem()));
-      if(canvas.getCurrentObject() != null){
-    	  canvas.getCurrentObject().setColor(canvas.getpenColor());
-    	  canvas.update();
-      }
+    	if(itemToColor(e.getItem()) != null){
+	    	canvas.setpenColor(itemToColor(e.getItem()));
+	    	if(canvas.getCurrentObject() != null){
+	    		canvas.getCurrentObject().setColor(canvas.getpenColor());
+	    		canvas.update();
+	    	}
+    	}
+    	else{
+    		System.out.println("here?");
+    		canvas.setFilled(itemToBoolean(e.getItem()));
+    		if(canvas.getCurrentObject() != null){
+	    		canvas.getCurrentObject().setFilled(canvas.isFilled());
+	    		canvas.update();
+	    	}
+    	}
     }
   }
 
@@ -85,7 +95,20 @@ public class ControlPanelController	implements ActionListener, ItemListener {
       return Color.red;
     }
     else {
-      return canvas.getpenColor();
+      return null;
     }
   }// end protected Color itemToColor( Object )
+  
+  protected boolean itemToBoolean(Object item){
+	  if(item == null){
+		  return false;
+	  }
+	  
+	  if(item.equals("filled")){
+		  return true;
+	  }
+	  else{
+		  return false;
+	  }
+  }
 }// end public class ControlPanelController implements ActionListener...
