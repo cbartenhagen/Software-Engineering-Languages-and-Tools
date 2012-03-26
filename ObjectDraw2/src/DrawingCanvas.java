@@ -1,5 +1,6 @@
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Point;
@@ -98,7 +99,7 @@ public class DrawingCanvas extends JComponent {
 
 
   /**
-   * Paints over the drawing canvas in the background color
+   * Clears the drawn object list and calls clearCanvas().
    */
   public void clearDrawnList() { 
 		drawnList.clear();
@@ -106,6 +107,9 @@ public class DrawingCanvas extends JComponent {
 	  
   }
   
+  /*
+   * Paints over the canvas in the background color.
+   */
   public void clearCanvas() {
 	imageBufferGraphics.setColor(BACKGROUND);
 	imageBufferGraphics.fillRect(0, 0, canvasWidth, canvasHeight);
@@ -185,33 +189,55 @@ public class DrawingCanvas extends JComponent {
     canvasHeight = height;
   }
   
+  /*
+   * Adds the input object to the list of drawn objects.
+   */
   public void addDrawnObject(DrawnObject obj){
 	  System.out.println("Drew " + obj.creatorTool);
 	  drawnList.add(obj);
   }
 
+  /*
+   * Returns the object currently set to selected.
+   */
   public DrawnObject getCurrentObject() {
 	return currentObject;
   }
 
+  /*
+   * Selects an object to be the current object.
+   */
   public void setCurrentObject(DrawnObject currentObject) {
 	this.currentObject = currentObject;
   }
 
+  /*
+   * Returns the list of objects that have been drawn.
+   */
   public Vector<DrawnObject> getDrawnList() {
 	return drawnList;
   }
   
+  /*
+   * Sets the list of available tools.
+   */
   public void setToolList(ToolList toolList) {
 	  this.toolList = toolList;
   }
 
+  /*
+   * Returns true if objects being drawn should be filled.
+   */
 public boolean isFilled() {
 	return filled;
 }
 
+/*
+ * Sets whether objects being drawn should be filled.
+ */
 public void setFilled(boolean filled) {
 	this.filled = filled;
 }
+
   
 }// end public class DrawingCanvas extends JComponent

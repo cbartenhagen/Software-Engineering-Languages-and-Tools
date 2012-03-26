@@ -116,10 +116,10 @@ public class TwoEndShapeTool extends Tool {
                       saveColor,
                       canvas.isFilled(),
                       null);
-    
+    //add the object to the canvas
     canvas.addDrawnObject(dobject);
 
-    /* Draw final"permanent" figure */
+    /* Draw final figure */
     if(canvas.isFilled()){
     	shape.draw(iBGraphics,
                startingMousePosition.x,
@@ -127,7 +127,7 @@ public class TwoEndShapeTool extends Tool {
                e.getPoint().x,
                e.getPoint().y);
     }
-    else{
+    else{  //draw outline of shape
     	shape.drawOutline(iBGraphics,
                 startingMousePosition.x,
                 startingMousePosition.y,
@@ -137,6 +137,13 @@ public class TwoEndShapeTool extends Tool {
     canvas.repaint();
   }
   
+  /*
+   * (non-Javadoc)
+   * 
+   * Draws the input object as the type of shape defined by this tool.
+   * 
+   * @see Tool#drawThis(DrawnObject)
+   */
   public void drawThis(DrawnObject drawing) {
 	    Graphics iBGraphics = canvas.getimageBufferGraphics();
 
@@ -144,7 +151,7 @@ public class TwoEndShapeTool extends Tool {
 	    iBGraphics.setPaintMode();
 	    iBGraphics.setColor(drawing.getColor());
 	    
-	    /* Erase final temporary figure  */
+	    /* If Object is filled  */
 	    if(drawing.isFilled()){
 	    	shape.draw(iBGraphics,
 	                      drawing.getTopLeftX(),
@@ -152,7 +159,7 @@ public class TwoEndShapeTool extends Tool {
 	                      drawing.getBottomRightX(),
 	                      drawing.getBottomRightY());
 	    }
-	    else{
+	    else{  //object drawn as outline
 	    	shape.drawOutline(iBGraphics,
                     drawing.getTopLeftX(),
                     drawing.getTopLeftY(),
@@ -163,20 +170,4 @@ public class TwoEndShapeTool extends Tool {
 	    canvas.repaint();
 	  }
   
-  public void clearThis(DrawnObject drawing) {
-	    Graphics iBGraphics = canvas.getimageBufferGraphics();
-
-	    /* Return graphics context to normal drawing mode and color */
-	    iBGraphics.setXORMode(Color.black);
-	    iBGraphics.setColor(Color.white);
-	    
-	    /* Erase final temporary figure  */
-	    shape.draw(iBGraphics,
-	                      drawing.getTopLeftX(),
-	                      drawing.getTopLeftY(),
-	                      drawing.getBottomRightX(),
-	                      drawing.getBottomRightY());
-	    
-	    canvas.repaint();
-	  }
 }// end public class TwoEndShapeTool extends Tool

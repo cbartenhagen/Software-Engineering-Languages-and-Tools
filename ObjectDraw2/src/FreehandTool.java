@@ -73,6 +73,13 @@ public class FreehandTool extends Tool {
     startingMousePosition = newMousePosition;
   }
   
+  /*
+   * (non-Javadoc)
+   * 
+   * Draw final object and save it to the canvas.
+   * 
+   * @see Tool#mouseReleased(java.awt.event.MouseEvent)
+   */
   public void mouseReleased(MouseEvent e) {
 	  points.add(e.getPoint());
 	  int minX = 0;
@@ -105,6 +112,7 @@ public class FreehandTool extends Tool {
 		  ((Point) points.elementAt(i)).y -= minY;
 	  }
 	  
+	  //create drawn object with the intermediate points as the other things
 	  DrawnObject dobject = new DrawnObject(minX,
               minY,
               maxX,
@@ -117,6 +125,13 @@ public class FreehandTool extends Tool {
 	  canvas.addDrawnObject(dobject);
   }
   
+  /*
+   * (non-Javadoc)
+   * 
+   * Draws the input freehand object.
+   * 
+   * @see Tool#drawThis(DrawnObject)
+   */
   public void drawThis(DrawnObject object){
 	  Point p1 = new Point();
 	  Point p2 = new Point();
@@ -125,6 +140,7 @@ public class FreehandTool extends Tool {
 	  
 	  canvas.getimageBufferGraphics().setColor(object.getColor());
 	  
+	  //draw all of the individual segments
 	  for(int i = 0; i < object.getOtherThings().size() - 1; i++){
 		  p1.x = minX + ((Point) object.getOtherThings().elementAt(i)).x;
 		  p1.y = minY + ((Point) object.getOtherThings().elementAt(i)).y;

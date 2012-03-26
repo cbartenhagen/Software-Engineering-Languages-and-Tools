@@ -1,9 +1,11 @@
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.util.Vector;
 
 /**
  * Draws text on the canvas.
@@ -18,7 +20,6 @@ public class TextTool extends Tool {
   /* Class member variables */
   protected DrawingCanvas canvas;
   protected Point startingPosition;
-  protected StringBuffer text;
   protected Font font = new Font("Serif", Font.BOLD, 24);
 
   /****< Constructor >*********************************************************/
@@ -41,7 +42,19 @@ public class TextTool extends Tool {
     startingPosition = e.getPoint();
     Graphics iBGraphics = canvas.getimageBufferGraphics();
     iBGraphics.setFont(font);
-    text = new StringBuffer();
+    
+    Vector<Object> theString = new Vector<Object>();
+    theString.add(new String(""));
+    DrawnObject dobject = new DrawnObject(e.getX(),
+            e.getY(),
+            e.getX(),
+            e.getY()+5,
+            getName(),
+            canvas.getpenColor(),
+            canvas.isFilled(),
+            theString);
+    
+    canvas.addDrawnObject(dobject);
   }
 
   /* (non-Javadoc)
@@ -52,10 +65,37 @@ public class TextTool extends Tool {
    */
   public void keyPressed(KeyEvent e)  {
     char nextChar = e.getKeyChar();
-    text.append(nextChar);
-    Graphics iBGraphics = canvas.getimageBufferGraphics();
-    iBGraphics.drawString(text.toString(), startingPosition.x,
-        startingPosition.y);
+    
+    
+    if(canvas.getDrawnList().size() > 0){
+    	System.out.println(canvas.getDrawnList().elementAt(canvas.getDrawnList().size()-1).getCreatorTool());
+	    if(canvas.getDrawnList().elementAt(canvas.getDrawnList().size()-1).getCreatorTool().equals(getName())){
+	System.out.println("Hello2");
+	        String text = ((String) (canvas.getDrawnList().elementAt(canvas.getDrawnList().size()-1).getOtherThings().elementAt(0)));
+	        text += nextChar;
+	        Vector<Object> theString = new Vector<Object>();
+	        theString.add(text);
+	        int width = text.length() * 10;
+	        canvas.getDrawnList().elementAt(canvas.getDrawnList().size()-1).setBottomRightX(canvas.getDrawnList().elementAt(canvas.getDrawnList().size()-1).topLeftX + width);
+	        canvas.getDrawnList().elementAt(canvas.getDrawnList().size() - 1).setOtherThings(theString);
+	        canvas.update();
+	    }
+    
+    }
+    
+    
     canvas.repaint();
+  }
+  
+  public void drawThis(DrawnObject object){
+      Graphics iBGraphics = canvas.getimageBufferGraphics();
+      Color bufferColor = iBGraphics.getColor();
+      iBGraphics.setColor(object.getColor());
+      System.out.println((String) object.getOtherThings().elementAt(0));
+      iBGraphics.drawString(((String) (object.getOtherThings().elementAt(0))), object.getTopLeftX(),
+          object.getTopLeftY());
+      iBGraphics.setColor(bufferColor);
+      
+	  
   }
 }// end public class TextTool extends Tool
